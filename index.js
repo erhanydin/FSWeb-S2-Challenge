@@ -75,20 +75,22 @@ function cumleKur(birinci, ikinci="", ucuncu="", dorduncu="", besinci=""){
 
 /* (Oto test yok) cumleKur fonksiyonuna yalnızca 1 parametre göndererek "Hello World!" stringini elde edin, sonucu konsolde gözlemleyin */
 
+console.log(cumleKur("Hello World!"));
 
 
 
 /* (Oto test yok) cumleKur fonksiyonuna yalnızca 2 parametre göndererek "Hello World!" stringini elde edin, sonucu konsolde gözlemleyin */
 
-
+console.log(cumleKur("Hello", " World!"));
 
 
 /* (Oto test var) cumleKur fonksiyonuna 5 parametre göndererek "Ben iyi bir yazılımcı olacağım!" stringini elde edin, sonucu `bircumle` değişkenine atayın ve konsolde gözlemleyin */
 var bircumle;
 
 /* kodlar buraya */
+bircumle = cumleKur("Ben ", "iyi ", "bir ", "yazılımcı ", "olacağım!"); 
 
-
+console.log(bircumle);
 
 //		Sayfanın en üstünde global olarak tanımlanmış `cumleler` adında bir dizi bulunmaktadır. Bu dizinin içinde en çok 5 en az 1 adet string bulunan diziler bulunmaktadır. Aşağıdaki görevlerde aksi belirtilmedikçe bu dizi kullanılacaktır.
 
@@ -104,9 +106,16 @@ var bircumle;
 	*/
 	
 
-function cumlelereDonustur(/* kodlar buraya */ ){
-	/* kodlar buraya */
+function cumlelereDonustur(cumleDizi, seperator=",",){
+	var yeniCumleDizi = new Array(); 
+	cumleDizi.map(function(cumle) {
+		yeniCumleDizi.push(cumle.join(seperator));
+	});
+
+	return yeniCumleDizi;
 }
+
+console.log(cumlelereDonustur(cumleler, " "));
 
 
 
@@ -120,9 +129,15 @@ function cumlelereDonustur(/* kodlar buraya */ ){
 			6. Oluşturulan paragraf döndürülecek
 	*/
 	
-function paragrafOlustur(/* kodlar buraya */ ){
-	/* kodlar buraya */ 
+function paragrafOlustur(cumleDizi, callback, callback2){
+	var newArray = callback2(cumleDizi, " ");
+	
+	let paragraf = callback(newArray[1], newArray[3], newArray[5], newArray[7], newArray[9]);
+	
+	return paragraf;
 }
+
+console.log(paragrafOlustur(cumleler, cumleKur, cumlelereDonustur));
 
 
 /* 	GÖREV 3:
@@ -133,6 +148,9 @@ function paragrafOlustur(/* kodlar buraya */ ){
 /* kodlar buraya */
 
 
+meyveler.shift();
+meyveler.pop();
+console.log(meyveler);
 
 
 
@@ -142,7 +160,9 @@ function paragrafOlustur(/* kodlar buraya */ ){
 //3b çözümü
 /* kodlar buraya */
 
-
+sebzeler.unshift("🐇");
+sebzeler.push("🦔");
+console.log(sebzeler);
 
 
 
@@ -155,10 +175,10 @@ function paragrafOlustur(/* kodlar buraya */ ){
 /* kodlar buraya */
 
 var manav;
+manav = new Array();
+manav = meyveler.concat(sebzeler);
 
-
-
-
+console.log(manav);
 
 /* 	GÖREV 4:
 		Yeni kurulmuş bir mesajlaşma startup firması atılan mesajları emojilerle zenginleştirmek istiyor. Bunun için emojiler adında bir nesne tanımlamışlar. Kullanıcının gönderdiği mesaj stringi içinde emojiler nesnesinin anahtarı(index) bulunuyorsa, bu işareti otomatik olarak anahtara ait değerde tanımlanmış emoji ile değiştirecek bir fonksiyon geliştirmek istiyorlar. ÖRNEK: Mesaj içinde ":)" sembolü bulunursa mesajı alan kişi bu sembolü "🙂" olarak görecek. Burdan yola çıkarak emojileriDonustur fonksiyonuna aşağıdakileri uygulayın.
@@ -170,11 +190,17 @@ var manav;
 			4. elde edilen string döndürülecek
  */
 
-function emojileriDonustur(/* kodlar buraya */){
-/* kodlar buraya */
+function emojileriDonustur(mesaj, obje){
+	
+	for(let emoji in obje){
+		mesaj = mesaj.replace(emoji.toUpperCase() ,obje[emoji]);
+		mesaj = mesaj.replace(emoji.toLowerCase() ,obje[emoji]);
+	}
 
+	return mesaj;
 }
 
+console.log(emojileriDonustur(":p", emojiler));
 
 
 /*  Bu satırın aşağısındaki kodları lütfen değiştirmeyin  */
